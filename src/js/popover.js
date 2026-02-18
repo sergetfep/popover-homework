@@ -1,4 +1,3 @@
-
 export default class Popover {
   constructor(element, title, content) {
     this.element = element;
@@ -10,14 +9,19 @@ export default class Popover {
   show() {
     if (this.popover) return;
 
-    const pop = document.createElement('div');
-    pop.className = 'popover';
-    pop.innerHTML = `
-      <div class="popover-title">${this.title}</div>
-      <div class="popover-content">${this.content}</div>
-    `;
+    const pop = document.createElement("div");
+    pop.className = "popover";
 
-    document.body.appendChild(pop);
+    const titleEl = document.createElement("div");
+    titleEl.className = "popover-title";
+    titleEl.textContent = this.title;
+
+    const contentEl = document.createElement("div");
+    contentEl.className = "popover-content";
+    contentEl.textContent = this.content;
+
+    pop.append(titleEl, contentEl);
+    document.body.append(pop);
 
     const el = this.element.getBoundingClientRect();
     const pr = pop.getBoundingClientRect();
